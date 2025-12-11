@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+    <title>À propos</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<h:body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-3xl">
+
+        <div class="flex items-center gap-6">
+
+            <!-- Image / Logo -->
+            <div class="flex-shrink-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
+                     alt="Indonésie"
+                     class="w-40 border border-gray-300 rounded-lg shadow-sm"/>
+            </div>
+
+            <!-- Divider vertical -->
+            <div class="w-px h-48 bg-gray-300"></div>
+
+            <!-- Texte -->
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-gray-800 mb-3">
+                    À propos de l’Indonésie
+                </h1>
+
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                    L’Indonésie est un archipel riche de plus de 17 000 îles, reconnu pour sa diversité
+                    culturelle, linguistique et naturelle. C’est un pays où modernité et traditions
+                    coexistent harmonieusement.
+                </p>
+
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Cette page présente notre mission : faire découvrir l’histoire, la culture, la
+                    gastronomie et les paysages uniques qui font de l’Indonésie une destination
+                    d’exception.
+                </p>
+
+                <h:form>
+                    <h:commandButton value="Retour à l’accueil"
+                                     action="#{navigationController.home}"
+                                     styleClass="rounded-md bg-blue-600 hover:bg-blue-700
+                                                px-6 py-2 text-white font-semibold shadow
+                                                focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </h:form>
+            </div>
+
+        </div>
+
+    </div>
+
+</h:body>
+</html>

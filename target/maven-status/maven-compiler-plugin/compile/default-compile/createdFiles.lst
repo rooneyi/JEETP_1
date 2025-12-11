@@ -1,0 +1,5 @@
+bean/LieuBean.class
+com/mycompany/jakartamissioin/resources/JakartaEE10Resource.class
+bean/NavigationBean.class
+bean/WelcomeBean.class
+com/mycompany/jakartamissioin/JakartaRestConfiguration.class
