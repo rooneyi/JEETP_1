@@ -1,46 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package bean;
-
-/**
- *
- * @author rooney
- */
-
+import Business.LieuEntrepriseBean;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import Entities.Lieu;
 import jakarta.inject.Named;
 
-@Named
+@Named(value ="LieuBean")
 @RequestScoped
-public class LieuBean {
+public class LieuBean implements Serializable{
 
     private String nom;
     private String description;
-    private double latitude;
     private double longitude;
+    private double latitude;
+    private List<Lieu> lieux = new ArrayList<>();
 
-    public void ajouterLieu() {
-        System.out.println("Nouveau lieu ajouté:");
-        System.out.println("Nom : " + nom);
-        System.out.println("Description : " + description);
-        System.out.println("Latitude : " + latitude);
-        System.out.println("Longitude : " + longitude);
+    @Inject
+    private LieuEntrepriseBean lieuEntrepriseBean;
 
-        // TODO : enregistrer en base de données
-    }
-
-    // Getters et setters
+    
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
+    public double getLongitude() { return longitude; }
+    public void setLongitude(double longitude) { this.longitude = longitude; }
+
     public double getLatitude() { return latitude; }
     public void setLatitude(double latitude) { this.latitude = latitude; }
 
-    public double getLongitude() { return longitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    public List<Lieu> getLieux() { return lieuEntrepriseBean.listerTousLesLieux(); }
+
+    public void ajouterLieu() {
+        if (nom != null && !nom.isEmpty() && description != null && !description.isEmpty()) {
+            lieuEntrepriseBean.ajouterLieuEntreprise(nom, description, latitude, longitude);
+        }
+    }
 }

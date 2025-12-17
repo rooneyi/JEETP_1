@@ -6,14 +6,12 @@
 
 <head>
     <title>Ajouter un lieu</title>
-
-    <!-- TailwindCSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <h:body class="min-h-screen flex items-center justify-center bg-gray-100">
 
-    <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-xl">
+    <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-3xl">
 
         <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
             Ajouter un lieu
@@ -24,7 +22,7 @@
             <!-- Nom -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-1">Nom du lieu</label>
-                <h:inputText value="#{lieuBean.nom}"
+                <h:inputText value="#{LieuBean.nom}"
                              required="true"
                              styleClass="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400"/>
             </div>
@@ -32,7 +30,7 @@
             <!-- Description -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-1">Description</label>
-                <h:inputTextarea value="#{lieuBean.description}"
+                <h:inputTextarea value="#{LieuBean.description}"
                                  required="true"
                                  styleClass="w-full border rounded-lg px-3 py-2 h-24 focus:ring-2 focus:ring-blue-400"/>
             </div>
@@ -40,7 +38,7 @@
             <!-- Latitude -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-1">Latitude</label>
-                <h:inputText value="#{lieuBean.latitude}"
+                <h:inputText value="#{LieuBean.latitude}"
                              required="true"
                              styleClass="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400"/>
             </div>
@@ -48,7 +46,7 @@
             <!-- Longitude -->
             <div class="mb-6">
                 <label class="block text-gray-700 font-medium mb-1">Longitude</label>
-                <h:inputText value="#{lieuBean.longitude}"
+                <h:inputText value="#{LieuBean.longitude}"
                              required="true"
                              styleClass="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400"/>
             </div>
@@ -56,13 +54,44 @@
             <!-- Bouton -->
             <div class="text-right">
                 <h:commandButton value="Enregistrer"
-                                 action="#{lieuBean.ajouterLieu}"
+                                 action="#{LieuBean.ajouterLieu}"
                                  styleClass="rounded-md bg-red-600 hover:bg-red-700
                                              px-6 py-2 text-white font-semibold shadow
                                              focus:outline-none focus:ring-2 focus:ring-red-400"/>
             </div>
 
         </h:form>
+
+        <h:dataTable value="#{LieuBean.lieux}"
+             styleClass="min-w-full border border-gray-300 rounded-lg mt-8">
+
+    <h:column>
+        <f:facet name="header">ID</f:facet>
+        #{l.id}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Nom</f:facet>
+        #{l.nom}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Description</f:facet>
+        #{l.description}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Latitude</f:facet>
+        #{l.latitude}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Longitude</f:facet>
+        #{l.longitude}
+    </h:column>
+
+</h:dataTable>
+
 
     </div>
 

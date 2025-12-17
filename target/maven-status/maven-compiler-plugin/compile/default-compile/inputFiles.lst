@@ -1,5 +1,10 @@
 /home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/com/mycompany/jakartamissioin/resources/JakartaEE10Resource.java
 /home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/bean/WelcomeBean.java
+/home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/Business/LieuEntrepriseBean.java
+/home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/Business/UtilisateurEntrepriseBean.java
 /home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/bean/NavigationBean.java
+/home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/Entities/Utilisateur.java
 /home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/com/mycompany/jakartamissioin/JakartaRestConfiguration.java
 /home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/bean/LieuBean.java
+/home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/bean/Utilisateurbean.java
+/home/rooney/NetBeansProjects/jakartaMissioin/src/main/java/Entities/Lieu.java

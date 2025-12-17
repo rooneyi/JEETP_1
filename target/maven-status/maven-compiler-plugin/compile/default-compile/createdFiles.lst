@@ -1,5 +1,10 @@
-bean/LieuBean.class
+Entities/Utilisateur.class
 com/mycompany/jakartamissioin/resources/JakartaEE10Resource.class
+Business/UtilisateurEntrepriseBean.class
+LieuBean.class
 bean/NavigationBean.class
 bean/WelcomeBean.class
+Business/LieuEntrepriseBean.class
+Entities/Lieu.class
+bean/Utilisateurbean.class
 com/mycompany/jakartamissioin/JakartaRestConfiguration.class
