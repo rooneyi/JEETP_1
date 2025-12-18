@@ -85,9 +85,25 @@
         #{l.latitude}
     </h:column>
 
+
     <h:column>
         <f:facet name="header">Longitude</f:facet>
         #{l.longitude}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Actions</f:facet>
+        <h:form style="display:inline">
+            <h:commandButton value="Modifier"
+                             action="#{LieuBean.preparerModification(l)}"
+                             styleClass="rounded bg-blue-500 hover:bg-blue-700 px-3 py-1 text-white text-xs font-semibold mr-2"/>
+        </h:form>
+        <h:form style="display:inline">
+            <h:commandButton value="Supprimer"
+                             action="#{LieuBean.supprimerLieu(l.id)}"
+                             styleClass="rounded bg-red-500 hover:bg-red-700 px-3 py-1 text-white text-xs font-semibold"
+                             onclick="return confirm('Supprimer ce lieu ?');"/>
+        </h:form>
     </h:column>
 
 </h:dataTable>

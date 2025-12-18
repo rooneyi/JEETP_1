@@ -38,6 +38,24 @@ public class LieuBean implements Serializable{
     public void ajouterLieu() {
         if (nom != null && !nom.isEmpty() && description != null && !description.isEmpty()) {
             lieuEntrepriseBean.ajouterLieuEntreprise(nom, description, latitude, longitude);
+            // Reset fields
+            nom = "";
+            description = "";
+            latitude = 0;
+            longitude = 0;
         }
+    }
+
+    public void supprimerLieu(int id) {
+        lieuEntrepriseBean.supprimerLieu(id);
+    }
+
+    public String preparerModification(Lieu lieu) {
+        this.nom = lieu.getNom();
+        this.description = lieu.getDescription();
+        this.latitude = lieu.getLatitude();
+        this.longitude = lieu.getLongitude();
+        // Ici, tu pourrais rediriger vers une page de modification dédiée si besoin
+        return null;
     }
 }
