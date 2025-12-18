@@ -62,8 +62,8 @@
 
         </h:form>
 
-        <h:dataTable value="#{LieuBean.lieux}"
-             styleClass="min-w-full border border-gray-300 rounded-lg mt-8">
+           <h:dataTable value="#{LieuBean.lieux}" var="l"
+               styleClass="min-w-full border border-gray-300 rounded-lg mt-8">
 
     <h:column>
         <f:facet name="header">ID</f:facet>
