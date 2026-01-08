@@ -1,11 +1,201 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        
-    </h:body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <title>Visites - JakartaMission</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .mesh-bg {
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(239, 68, 68, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(239, 68, 68, 0.03) 0px, transparent 50%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+    </style>
+</h:head>
+
+<h:body class="min-h-screen mesh-bg text-slate-800">
+
+    <!-- Top Bar -->
+    <div class="fixed top-0 inset-x-0 h-1 bg-gradient-to-r from-red-400 via-red-600 to-red-400 z-50"></div>
+
+    <div class="max-w-7xl mx-auto px-6 py-12 space-y-16">
+
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 border-b pb-10">
+
+            <div>
+                <span class="text-xs font-extrabold text-red-600 uppercase tracking-widest">Jakarta Mission</span>
+                <h1 class="text-5xl font-black mt-2">
+                    Registre des <span class="text-red-600">Visites</span>
+                </h1>
+                <p class="text-slate-500 mt-3 max-w-xl">
+                    Historique de toutes vos explorations enregistrées.
+                </p>
+            </div>
+
+            <h:form>
+                <h:commandLink action="#{navigationController.home}"
+                    styleClass="px-6 py-3 rounded-xl bg-white border shadow hover:shadow-md transition font-semibold">
+                    🏠 Tableau de bord
+                </h:commandLink>
+            </h:form>
+        </div>
+
+        <!-- Messages -->
+        <h:messages globalOnly="true"
+            infoClass="bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500 p-4 rounded-xl"
+            errorClass="bg-red-50 text-red-700 border-l-4 border-red-500 p-4 rounded-xl" />
+
+        <!-- MAIN GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+            <!-- FORM -->
+            <div class="lg:col-span-5 sticky top-10">
+                <div class="glass-card rounded-3xl p-10 space-y-8">
+
+                    <div>
+                        <h2 class="text-2xl font-black">Nouvelle visite</h2>
+                        <p class="text-sm text-slate-400">Ajouter une nouvelle exploration</p>
+                    </div>
+
+                    <h:form class="space-y-6">
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase text-slate-400">Voyageur</label>
+                            <h:selectOneMenu value="#{VisiteBean.utilisateurId}"
+                                styleClass="w-full rounded-xl border px-5 py-3 font-semibold focus:ring-2 focus:ring-red-500">
+                                <f:selectItem itemLabel="Sélectionner..." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{VisiteBean.listeUtilisateurs}" var="u" itemLabel="#{u.username}"
+                                    itemValue="#{u.id}" />
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase text-slate-400">Lieu visité</label>
+                            <h:selectOneMenu value="#{VisiteBean.lieuId}"
+                                styleClass="w-full rounded-xl border px-5 py-3 font-semibold focus:ring-2 focus:ring-red-500">
+                                <f:selectItem itemLabel="Choisir un lieu..." itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{VisiteBean.listeLieux}" var="l" itemLabel="#{l.nom}"
+                                    itemValue="#{l.id}" />
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase text-slate-400">Note</label>
+                                <h:selectOneMenu value="#{VisiteBean.note}"
+                                    styleClass="w-full rounded-xl border px-5 py-3 font-semibold focus:ring-2 focus:ring-red-500">
+                                    <f:selectItem itemLabel="Note..." itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="5 - Excellent" itemValue="5" />
+                                    <f:selectItem itemLabel="4 - Très bien" itemValue="4" />
+                                    <f:selectItem itemLabel="3 - Moyen" itemValue="3" />
+                                    <f:selectItem itemLabel="2 - Passable" itemValue="2" />
+                                    <f:selectItem itemLabel="1 - Déçu" itemValue="1" />
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold uppercase text-slate-400">Durée (min)</label>
+                                <h:inputText value="#{VisiteBean.dureeMinutes}"
+                                    styleClass="w-full rounded-xl border px-5 py-3 font-semibold focus:ring-2 focus:ring-red-500" />
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase text-slate-400">Commentaire</label>
+                            <h:inputTextarea value="#{VisiteBean.commentaire}" rows="4"
+                                styleClass="w-full rounded-xl border px-5 py-3 font-semibold resize-none focus:ring-2 focus:ring-red-500" />
+                        </div>
+
+                        <h:commandLink action="#{VisiteBean.enregistrerVisiteComplete}"
+                            styleClass="btn-gradient w-full py-4 rounded-xl text-white font-bold hover:scale-[1.02] transition">
+                            Enregistrer la visite
+                        </h:commandLink>
+
+                    </h:form>
+                </div>
+            </div>
+
+            <!-- HISTORY -->
+            <div class="lg:col-span-7 space-y-6">
+
+                <div class="flex justify-between items-center">
+                    <h2 class="text-3xl font-black">Historique</h2>
+                    <span class="text-sm font-semibold text-slate-400">
+                        #{VisiteBean.visites.size()} visites
+                    </span>
+                </div>
+
+                <ui:repeat value="#{VisiteBean.visites}" var="v">
+
+                    <div class="glass-card rounded-3xl p-8 flex gap-6 hover:shadow-lg transition">
+
+                        <div
+                            class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl font-black">
+                            #{v.utilisateur.username.substring(0,1).toUpperCase()}
+                        </div>
+
+                        <div class="flex-1 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-xl font-bold">#{v.utilisateur.username}</h3>
+                                <span class="text-sm text-slate-400">#{v.dateVisite}</span>
+                            </div>
+
+                            <p class="text-red-600 font-semibold">📍 #{v.lieu.nom}</p>
+
+                            <p class="italic text-slate-600">"#{v.commentaire}"</p>
+
+                            <div class="flex gap-6 text-sm text-slate-400">
+                                <span>⏱ #{v.dureeMinutes} min</span>
+                                <span>⭐ #{v.note}/5</span>
+                            </div>
+                        </div>
+
+                        <h:form>
+                            <h:commandLink action="#{VisiteBean.supprimerVisite(v.id)}"
+                                onclick="return confirm('Supprimer cette visite ?')"
+                                styleClass="p-3 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition">
+                                🗑
+                            </h:commandLink>
+                        </h:form>
+
+                    </div>
+
+                </ui:repeat>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</h:body>
+
 </html>

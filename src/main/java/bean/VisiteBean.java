@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bean;
 
 import Business.LieuEntrepriseBean;
@@ -24,7 +20,7 @@ import java.util.List;
  * 
  * @author rooney
  */
-@Named(value = "visiteBean")
+@Named(value = "VisiteBean")
 @RequestScoped
 public class VisiteBean implements Serializable {
 
@@ -52,14 +48,27 @@ public class VisiteBean implements Serializable {
     }
 
     /**
+     * Retourne la liste de tous les utilisateurs pour le menu déroulant
+     */
+    public List<Utilisateur> getListeUtilisateurs() {
+        return utilisateurEntrepriseBean.listerTousLesUtilisateurs();
+    }
+
+    /**
+     * Retourne la liste de tous les lieux pour le menu déroulant
+     */
+    public List<Lieu> getListeLieux() {
+        return lieuEntrepriseBean.listerTousLesLieux();
+    }
+
+    /**
      * Charge toutes les visites
      */
     public void chargerToutesLesVisites() {
         try {
             visites = visiteEntrepriseBean.obtenirToutesLesVisites();
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Impossible de charger les visites: " + e.getMessage());
+            diagnosticException("Erreur de Chargement", e);
         }
     }
 
@@ -69,20 +78,18 @@ public class VisiteBean implements Serializable {
     public String enregistrerVisiteSimple() {
         try {
             if (utilisateurId == null || lieuId == null) {
-                ajouterMessage(FacesMessage.SEVERITY_WARN,
-                        "Attention", "Veuillez sélectionner un utilisateur et un lieu");
+                ajouterMessage(FacesMessage.SEVERITY_WARN, "Attention",
+                        "Veuillez sélectionner un utilisateur et un lieu");
                 return null;
             }
 
             visiteEntrepriseBean.enregistrerVisite(utilisateurId, lieuId);
-            ajouterMessage(FacesMessage.SEVERITY_INFO,
-                    "Succès", "Visite enregistrée avec succès!");
+            ajouterMessage(FacesMessage.SEVERITY_INFO, "Succès", "Visite enregistrée avec succès!");
             chargerToutesLesVisites();
             reinitialiser();
-            return "visites?faces-redirect=true";
+            return "visits?faces-redirect=true";
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Erreur lors de l'enregistrement: " + e.getMessage());
+            diagnosticException("Erreur Enregistrement", e);
             return null;
         }
     }
@@ -93,23 +100,33 @@ public class VisiteBean implements Serializable {
     public String enregistrerVisiteComplete() {
         try {
             if (utilisateurId == null || lieuId == null) {
-                ajouterMessage(FacesMessage.SEVERITY_WARN,
-                        "Attention", "Veuillez sélectionner un utilisateur et un lieu");
+                ajouterMessage(FacesMessage.SEVERITY_WARN, "Attention",
+                        "Veuillez sélectionner un utilisateur et un lieu");
                 return null;
             }
 
-            visiteEntrepriseBean.enregistrerVisite(utilisateurId, lieuId,
-                    dureeMinutes, commentaire, note);
-            ajouterMessage(FacesMessage.SEVERITY_INFO,
-                    "Succès", "Visite enregistrée avec succès!");
+            visiteEntrepriseBean.enregistrerVisite(utilisateurId, lieuId, dureeMinutes, commentaire, note);
+            ajouterMessage(FacesMessage.SEVERITY_INFO, "Succès", "Visite enregistrée avec succès!");
             chargerToutesLesVisites();
             reinitialiser();
-            return "visites?faces-redirect=true";
+            return "visits?faces-redirect=true";
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Erreur lors de l'enregistrement: " + e.getMessage());
+            diagnosticException("Erreur Technique", e);
             return null;
         }
+    }
+
+    /**
+     * Déballe les exceptions EJB pour montrer la cause réelle
+     */
+    private void diagnosticException(String prefix, Exception e) {
+        Throwable cause = e;
+        while (cause.getCause() != null && cause != cause.getCause()) {
+            cause = cause.getCause();
+        }
+        String msg = (cause.getMessage() != null) ? cause.getMessage() : cause.toString();
+        ajouterMessage(FacesMessage.SEVERITY_ERROR, prefix, msg);
+        e.printStackTrace();
     }
 
     /**
@@ -121,8 +138,7 @@ public class VisiteBean implements Serializable {
                 visites = visiteEntrepriseBean.obtenirVisitesParUtilisateur(utilisateurId);
             }
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Impossible de charger les visites: " + e.getMessage());
+            diagnosticException("Erreur", e);
         }
     }
 
@@ -135,8 +151,7 @@ public class VisiteBean implements Serializable {
                 visites = visiteEntrepriseBean.obtenirVisitesParLieu(lieuId);
             }
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Impossible de charger les visites: " + e.getMessage());
+            diagnosticException("Erreur", e);
         }
     }
 
@@ -146,12 +161,10 @@ public class VisiteBean implements Serializable {
     public void supprimerVisite(Long visiteId) {
         try {
             visiteEntrepriseBean.supprimerVisite(visiteId);
-            ajouterMessage(FacesMessage.SEVERITY_INFO,
-                    "Succès", "Visite supprimée avec succès!");
+            ajouterMessage(FacesMessage.SEVERITY_INFO, "Succès", "Visite supprimée avec succès!");
             chargerToutesLesVisites();
         } catch (Exception e) {
-            ajouterMessage(FacesMessage.SEVERITY_ERROR,
-                    "Erreur", "Erreur lors de la suppression: " + e.getMessage());
+            diagnosticException("Erreur de Suppression", e);
         }
     }
 
@@ -261,11 +274,30 @@ public class VisiteBean implements Serializable {
         return note;
     }
 
-    public String afficherFormulaireVisite() {
-        return "visits?faces-redirect=true";
-    }
-
     public void setNote(Integer note) {
         this.note = note;
+    }
+
+    public List<Integer> getStars(int note) {
+        List<Integer> stars = new java.util.ArrayList<>();
+        if (note > 0) {
+            for (int i = 0; i < note; i++)
+                stars.add(i);
+        }
+        return stars;
+    }
+
+    public List<Integer> getEmptyStars(int note) {
+        List<Integer> stars = new java.util.ArrayList<>();
+        int empty = 5 - note;
+        if (empty > 0) {
+            for (int i = 0; i < empty; i++)
+                stars.add(i);
+        }
+        return stars;
+    }
+
+    public String afficherFormulaireVisite() {
+        return "/pages/visits?faces-redirect=true";
     }
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import Entities.Lieu;
 import java.util.List;
+
 /**
  *
  * @author rooney
@@ -44,5 +45,9 @@ public class LieuEntrepriseBean {
 
     public Lieu trouverLieuParId(int id) {
         return em.find(Lieu.class, id);
+    }
+
+    public Lieu getLieuById(int id) {
+        return trouverLieuParId(id);
     }
 }
