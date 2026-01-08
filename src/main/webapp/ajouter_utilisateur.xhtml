@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <title>Créer un compte</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</h:head>
+
+<h:body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <div class="bg-white shadow-2xl rounded-2xl w-full max-w-2xl p-10">
+
+        <!-- Titre -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">
+                Créer un compte
+            </h1>
+            <p class="text-gray-500 mt-2">
+                Renseignez les informations ci-dessous
+            </p>
+        </div>
+
+        <h:form id="ajoutUserForm" class="space-y-6">
+
+            <!-- Messages globaux -->
+            <h:messages globalOnly="true" errorClass="block w-full rounded-lg bg-red-100 text-red-700 px-4 py-3"
+                infoClass="block w-full rounded-lg bg-green-100 text-green-700 px-4 py-3" />
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Username -->
+                <div>
+                    <h:outputLabel for="username" value="Nom d'utilisateur"
+                        class="block text-sm font-medium text-gray-700 mb-1" />
+
+                    <h:inputText id="username" value="#{utilisateurBean.username}" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                        focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                    <h:message for="username" styleClass="text-red-600 text-sm mt-1" />
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <h:outputLabel for="email" value="Email" class="block text-sm font-medium text-gray-700 mb-1" />
+
+                    <h:inputText id="email" value="#{utilisateurBean.email}" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                        focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                    <h:message for="email" styleClass="text-red-600 text-sm mt-1" />
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <h:outputLabel for="password" value="Mot de passe"
+                        class="block text-sm font-medium text-gray-700 mb-1" />
+
+                    <h:inputSecret id="password" value="#{utilisateurBean.password}" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                          focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                    <h:message for="password" styleClass="text-red-600 text-sm mt-1" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <h:outputLabel for="confirmPassword" value="Confirmer le mot de passe"
+                        class="block text-sm font-medium text-gray-700 mb-1" />
+
+                    <h:inputSecret id="confirmPassword" value="#{utilisateurBean.confirmPassword}" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                          focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                    <h:message for="confirmPassword" styleClass="text-red-600 text-sm mt-1" />
+                </div>
+
+            </div>
+
+            <!-- Description -->
+            <div>
+                <h:outputLabel for="description" value="Description"
+                    class="block text-sm font-medium text-gray-700 mb-1" />
+
+                <h:inputTextarea id="description" rows="3" value="#{utilisateurBean.description}" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                        focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+            </div>
+
+            <!-- Bouton -->
+            <div class="pt-4">
+                <h:commandButton value="Créer le compte" action="#{utilisateurBean.ajouterUtilisateur}" styleClass="w-full rounded-lg bg-red-600 hover:bg-red-700
+                                            px-6 py-3 text-white font-semibold shadow
+                                            transition focus:outline-none focus:ring-2 focus:ring-red-400" />
+            </div>
+
+            <!-- Lien retour -->
+            <p class="text-center text-sm text-gray-600 pt-4">
+                Déjà un compte ?
+                <a href="index.xhtml" class="text-red-600 hover:underline font-medium">
+                    Se connecter
+                </a>
+            </p>
+
+        </h:form>
+
+    </div>
+
+</h:body>
+
+</html>

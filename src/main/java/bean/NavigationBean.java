@@ -8,34 +8,52 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author rooney
  */
-@Named(value="navigationController")
+@Named("navigationController")
 @RequestScoped
 public class NavigationBean {
-    public void home(){
-        try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
-        }catch(IOException e){
-            e.printStackTrace();
+
+    public void voirApropos() {
+        this.redirection("pages/about.xhtml");
+    }
+
+    public void home() {
+        this.redirection("../home.xhtml");
+    }
+
+    public void redirection(String destination) {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect(destination);
+        } catch (IOException ex) {
+            Logger.getLogger(NavigationBean.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
-    public void voirLieu(){
-        try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("pages/lieu.xhtml");
-        }catch(IOException e){
-            e.printStackTrace();
+
+    // navigation vers lieu
+    public void ajouterLieu() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("pages/lieu.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(NavigationBean.class.getName())
+                    .log(Level.SEVERE, "Erreur lors de la navigation", ex);
         }
+
     }
-    public void voirApropos(){
-        try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect("pages/about.xhtml");
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+
+    public void voirLieu() {
+        this.redirection("pages/lieu.xhtml");
     }
-    
+
+    public void voirVisite() {
+        this.redirection("pages/visits.xhtml");
+    }
 }

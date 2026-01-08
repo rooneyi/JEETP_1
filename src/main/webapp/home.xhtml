@@ -1,57 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<head>
+<h:head>
     <title>Bienvenue en Indonésie</title>
 
-    <!-- TailwindCSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
+</h:head>
 
 <h:body class="min-h-screen flex items-center justify-center bg-gray-100">
 
-    <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl">
+    <div class="bg-white shadow-2xl rounded-2xl w-full max-w-4xl overflow-hidden">
 
-        <div class="flex items-center gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2">
 
-            <!-- Drapeau -->
-            <div class="flex-shrink-0">
+            <!-- Colonne gauche : Image -->
+            <div class="bg-gray-50 flex items-center justify-center p-10">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
-                     alt="Drapeau Indonésie"
-                     class="w-40 border border-gray-300 rounded-lg shadow-sm"/>
+                    alt="Drapeau Indonésie" class="w-52 rounded-xl shadow-md border" />
             </div>
 
-            <!-- Divider vertical -->
-            <div class="w-px h-40 bg-gray-300"></div>
+            <!-- Colonne droite : Contenu -->
+            <div class="p-10 flex flex-col justify-center">
 
-            <!-- Texte -->
-            <div class="flex-1">
-                <h1 class="text-3xl font-bold text-gray-800 mb-3">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">
                     Bienvenue en Indonésie
                 </h1>
 
-                <p class="text-gray-600 mb-6">
-                    Explorez la beauté, la culture et la diversité de l’Indonésie.
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Découvrez une destination unique où la culture,
+                    la nature et la modernité se rencontrent.
                 </p>
 
-                <h:form class="flex gap-4">
+                <h:form class="flex flex-col sm:flex-row gap-4">
 
                     <!-- Bouton A propos -->
-                    <h:commandButton value="A propos"
-                                     action="#{navigationController.voirApropos}"
-                                     styleClass="rounded-md bg-red-600 hover:bg-red-700
-                                                 px-6 py-2 text-white font-semibold shadow
-                                                 focus:outline-none focus:ring-2 focus:ring-red-400"/>
+                    <h:commandButton value="À propos" action="#{navigationController.voirApropos}" styleClass="w-full sm:w-auto rounded-lg bg-red-600 hover:bg-red-700
+                                                 px-8 py-3 text-white font-semibold shadow
+                                                 transition focus:outline-none focus:ring-2 focus:ring-red-400" />
 
-                    <!-- Nouveau bouton Lieu -->
-                    <h:commandButton value="Lieu"
-                                     action="#{navigationController.voirLieu}"
-                                     styleClass="rounded-md bg-red-600 hover:bg-red-700
-                                                 px-6 py-2 text-white font-semibold shadow
-                                                 focus:outline-none focus:ring-2 focus:ring-red-400"/>
+                    <!-- Bouton Lieu -->
+                    <h:commandButton value="Lieux" action="#{navigationController.voirLieu}" styleClass="w-full sm:w-auto rounded-lg bg-red-600 hover:bg-red-700
+                                                 px-8 py-3 text-white font-semibold shadow
+                                                 transition focus:outline-none focus:ring-2 focus:ring-red-400" />
+
                 </h:form>
 
             </div>
@@ -61,4 +55,5 @@
     </div>
 
 </h:body>
+
 </html>

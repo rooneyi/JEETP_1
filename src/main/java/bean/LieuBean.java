@@ -1,3 +1,5 @@
+package bean;
+
 import Business.LieuEntrepriseBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -16,6 +18,7 @@ public class LieuBean implements Serializable{
     private double longitude;
     private double latitude;
     private List<Lieu> lieux = new ArrayList<>();
+    private String weatherMessage;
 
     @Inject
     private LieuEntrepriseBean lieuEntrepriseBean;
@@ -45,6 +48,15 @@ public class LieuBean implements Serializable{
             longitude = 0;
         }
     }
+
+    public String getWeatherMessage() {
+        return weatherMessage;
+    }
+
+    public void setWeatherMessage(String weatherMessage) {
+        this.weatherMessage = weatherMessage;
+    }
+    
 
     public void supprimerLieu(int id) {
         lieuEntrepriseBean.supprimerLieu(id);

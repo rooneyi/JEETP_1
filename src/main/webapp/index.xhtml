@@ -1,50 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<head>
-    <title>Bienvenue en Indonésie</title>
+<h:head>
+    <title>Authentification</title>
 
-    <!-- TailwindCSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
+</h:head>
 
 <h:body class="min-h-screen flex items-center justify-center bg-gray-100">
 
-    <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl">
+    <div class="bg-white shadow-2xl rounded-2xl w-full max-w-4xl overflow-hidden">
 
-        <div class="flex items-center gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2">
 
-            <!-- Drapeau -->
-            <div class="flex-shrink-0">
+            <!-- Colonne gauche : Présentation -->
+            <div class="bg-gray-50 p-10 flex flex-col justify-center">
+
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
-                     alt="Drapeau Indonésie"
-                     class="w-40 border border-gray-300 rounded-lg shadow-sm"/>
-            </div>
+                    alt="Drapeau Indonésie" class="w-40 mb-8 rounded-lg shadow" />
 
-            <!-- Divider vertical -->
-            <div class="w-px h-40 bg-gray-300"></div>
-
-            <!-- Texte -->
-            <div class="flex-1">
-                <h1 class="text-3xl font-bold text-gray-800 mb-3">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">
                     Bienvenue en Indonésie
                 </h1>
 
-                <p class="text-gray-600 mb-6">
-                    Explorez la beauté, la culture et la diversité de l’Indonésie.
+                <p class="text-gray-600 leading-relaxed">
+                    Connectez-vous pour explorer la beauté, la culture
+                    et la diversité exceptionnelle de l’Indonésie.
                 </p>
 
-                <h:form>
-                    <h:commandButton value="Découvrir"
-                                     action="home"
-                                     styleClass="rounded-md bg-red-600 hover:bg-red-700
-                                                px-6 py-2 text-white font-semibold shadow
-                                                focus:outline-none focus:ring-2 focus:ring-red-400"/>
-                </h:form>
-                <a href="pages/ajouter_utilisateur.xhtml">Créer un compte</a>
+            </div>
+
+            <!-- Colonne droite : Formulaire -->
+            <div class="p-10 flex items-center">
+
+                <div class="w-full">
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                        Connexion
+                    </h2>
+
+                    <p class="text-gray-500 mb-8">
+                        Entrez vos identifiants pour continuer
+                    </p>
+
+                    <h:form class="space-y-6">
+
+                        <!-- Email -->
+                        <div>
+                            <h:outputLabel for="email" value="Adresse email"
+                                class="block text-sm font-medium text-gray-700 mb-1" />
+
+                            <h:inputText id="email" value="#{welcomeBean.email}" required="true" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                                focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                            <h:message for="email" styleClass="text-red-600 text-sm mt-1" />
+                        </div>
+
+                        <!-- Mot de passe -->
+                        <div>
+                            <h:outputLabel for="password" value="Mot de passe"
+                                class="block text-sm font-medium text-gray-700 mb-1" />
+
+                            <h:inputSecret id="password" value="#{welcomeBean.password}" required="true" class="w-full rounded-lg border border-gray-300 px-4 py-2.5
+                                                  focus:border-red-500 focus:ring-2 focus:ring-red-300" />
+
+                            <h:message for="password" styleClass="text-red-600 text-sm mt-1" />
+                        </div>
+
+                        <!-- Messages globaux -->
+                        <h:messages globalOnly="true" styleClass="text-red-600 text-sm" />
+
+                        <!-- Bouton -->
+                        <h:commandButton value="Se connecter" action="#{welcomeBean.sAuthentifier}" styleClass="w-full rounded-lg bg-red-600 hover:bg-red-700
+                                                    px-6 py-3 text-white font-semibold shadow
+                                                    transition focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+                        <!-- Lien inscription -->
+                        <p class="text-center text-sm text-gray-600 pt-4">
+                            Pas encore de compte ?
+                            <a href="ajouter_utilisateur.xhtml" class="text-red-600 hover:underline font-medium">
+                                Créer un compte
+                            </a>
+                        </p>
+
+                    </h:form>
+
+                </div>
 
             </div>
 
@@ -53,4 +97,5 @@
     </div>
 
 </h:body>
+
 </html>

@@ -19,12 +19,11 @@ import jakarta.persistence.Table;
 public class Lieu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nom;
     private String description;
     private double longitude;
     private double latitude;
-
 
     public Lieu() {
     }
@@ -35,16 +34,40 @@ public class Lieu {
         this.longitude = longitude;
         this.latitude = latitude;
     }
-    public int getId() { return id; }
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public Integer getId() {
+        return id;
+    }
 
-    public double getLongitude() { return longitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    public String getNom() {
+        return nom;
+    }
 
-    public double getLatitude() { return latitude; }
-    public void setLatitude(double latitude) { this.latitude = latitude; }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 }
